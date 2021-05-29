@@ -14,9 +14,10 @@ def add_product(list):
         item = Product(tokens[0], int(tokens[1]))
         list.append(item)
         state = True
-    except:
+    except Exception:
         state = False
-        raise ValueError("<Error> You must enter correct values")
+        print("<Error> You must enter correct values")
+
     if state is False:
         return add_product(list)
     else:
