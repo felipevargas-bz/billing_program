@@ -1,41 +1,64 @@
+
+
 class Product:
 
     def __init__(self, name, value):
         self.name = name
         self.value = value
-def add_product(list):
-    string = input("Add new product: ")
+
+
+def discounts(p_list, total):
+    IVA = ((19 * total) / 100)
     yes = 'yes'
-    no = 'no'
+    discount = 0
+    subtotal = (total + IVA)
+    discount_products_index = []
 
-    tokens = string.split(sep='= ')
+    if subtotal < 100000:
+        print("No discounts will be applied.")
+        state = input("Do you want to continue billing? (yes or no): ")
 
-    try:
-        item = Product(tokens[0], int(tokens[1]))
-        list.append(item)
-        state = True
-    except Exception:
-        state = False
-        print("<Error> You must enter correct values")
+    elif subtotal >= 100000 and subtotal <= 200000:
+        index = 0
+        subtotal = 0
 
-    if state is False:
-        return add_product(list)
+        while index < len(p_list):
+            if p_list[index].value > 20000:
+                discount += ((5 * p_list[index].value) / 100)
+            else:
+                subtotal += p_list[index].value
+            index += 1
+        subtotal += discount
+        subtotal = (subtotal + ((19 * subtotal) / 100))
+
+        state = input("Do you want to continue billing? (yes or no): ")
     else:
-        print("Do you want to continue billing? (yes or no)")
-        buy = input()
+        subtotal = (total + ((10 * total) / 100))
+        subtotal += IVA
+        state = input("Do you want to continue billing? (yes or no): ")
+    
+    if state == yes:
+        return add_product(p_list)
+    else:
+        print("The total of the invoice is: {}".format(subtotal))
+        print("Total discounts: {}".format(discount))
 
-        if buy == yes:
-            return add_product(list)
-        else:
-            index = 0
-            while (index < len(list)):
-                print("name: {}, price: {}".format(list[index].name, list[index].value))
-                index += 1
+
+def billing(p_list):
+    index = 0
+    total = 0
+
+    while index < len(p_list):
+       total += p_list[index].value
+       index += 1
+
+    discounts(p_list, total)
+
+
 
 def main():
-    list = []
-    print("Please enter the products to be invoiced. do it as follows: (product_name = price).")
-    add_product(list)
+    p_list = []
+    add_product(p_list)
 
 if __name__ == "__main__":
     main()
