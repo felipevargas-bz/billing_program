@@ -1,13 +1,10 @@
-from main import *
-from add_product import *
-
+from add_product import add_product
 
 def discounts(p_list, total):
     IVA = ((19 * total) / 100)
     yes = 'yes'
     discount = 0
     subtotal = (total + IVA)
-    discount_products_index = []
 
     if subtotal < 100000:
         print("No discounts will be applied.")
@@ -33,28 +30,7 @@ def discounts(p_list, total):
         state = input("Do you want to continue billing? (yes or no): ")
     
     if state == yes:
-        return add_product(p_list)
+        add_product(p_list)
     else:
         print("The total of the invoice is: {}".format(subtotal))
         print("Total discounts: {}".format(discount))
-
-
-def billing(p_list):
-    index = 0
-    total = 0
-
-    while index < len(p_list):
-       total += p_list[index].value
-       index += 1
-
-    discounts(p_list, total)
-
-
-
-def main():
-    p_list = []
-    add_product(p_list)
-
-if __name__ == "__main__":
-    main()
-

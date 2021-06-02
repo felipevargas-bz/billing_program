@@ -1,8 +1,9 @@
+from main import *
+
 def add_product(p_list):
     print("Please enter the products to be invoiced. do it as follows: (product_name = price).")
     string = input("Add new product: ")
     yes = 'yes'
-    no = 'no'
 
     tokens = string.split(sep='= ')
 
@@ -24,5 +25,4 @@ def add_product(p_list):
             return add_product(p_list)
         else:
             billing(p_list)
-
 
