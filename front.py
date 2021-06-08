@@ -11,7 +11,7 @@ def add():
     p_list.append(add_product(name.get(), price.get()))
     t_invoice.set(str(total_invoice()))
     t_iva.set(str(total_iva()))
-    t_discouts.set(str(total_discounts()))
+   # t_discouts.set(str(total_discounts()))
 
 
 
